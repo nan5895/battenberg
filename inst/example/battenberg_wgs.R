@@ -15,7 +15,8 @@ option_list = list(
   make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character"),
   make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references ", metavar="character"),
   make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character"),
-  make_option(c("--beagle_usage"), type="character", default=F, help="Directory where your battenberg references are located", metavar="character")
+  make_option(c("--beagle_usage"), type="character", default=F, help="Directory where your battenberg references are located", metavar="character"),
+  make_option(c("--analysis_type"), type="character", default="paired", help="Directory where your battenberg references are located", metavar="character")
 )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -33,7 +34,7 @@ SKIP_PHASING = opt$skip_phasing
 NTHREADS = opt$cpu
 PRIOR_BREAKPOINTS_FILE = opt$bp
 
-analysis = "cell_line"
+analysis = opt$analysis_type
 
 ###############################################################################
 # 2018-11-01
