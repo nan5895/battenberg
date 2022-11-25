@@ -13,6 +13,8 @@ option_list = list(
   make_option(c("--skip_phasing"), type="logical", default=FALSE, action="store_true", help="Provide when phasing has previously completed. This expects the files on disk", metavar="character"),
   make_option(c("--cpu"), type="numeric", default=8, help="The number of CPU cores to be used by the pipeline (Default: 8)", metavar="character"),
   make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character")
+  make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references ", metavar="character")
+  make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character")
 )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -42,12 +44,12 @@ JAVAJRE = "java"
 ALLELECOUNTER = "alleleCounter"
 IMPUTE_EXE = "impute2"
 
-GENOMEBUILD = "hg38"
+GENOMEBUILD = opt$refbuild
 USEBEAGLE = T
 
 # General static
 if (GENOMEBUILD=="hg19") {
-	impute_basedir = "/hps/research/gerstung/sdentro/reference/human/battenberg/"
+	impute_basedir = opt$refdir
 	IMPUTEINFOFILE = file.path(impute_basedir, "battenberg_impute_v3/impute_info.txt")
 	G1000ALLELESPREFIX = file.path(impute_basedir, "battenberg_1000genomesloci2012_v3/1000genomesAlleles2012_chr")
 	G1000LOCIPREFIX = file.path(impute_basedir, "battenberg_1000genomesloci2012_v3/1000genomesloci2012_chr")
@@ -56,7 +58,7 @@ if (GENOMEBUILD=="hg19") {
 	
 	# WGS specific static
 	#PROBLEMLOCI = "/lustre/scratch117/casm/team219/sd11/reference/GenomeFiles/battenberg_probloci/probloci_270415.txt.gz"
-	PROBLEMLOCI = "/hps/research/gerstung/sdentro/reference/human/battenberg/battenberg_probloci/probloci_270415.txt.gz"
+	PROBLEMLOCI = file.path(impute_basedir, "probloci/probloci_270415.txt.gz")
 	GENOME_VERSION = "b37"
 	GENOMEBUILD = "hg19"
 	#BEAGLE_BASEDIR = "/nfs/users/nfs_s/sd11/scratch17_t219/reference/GenomeFiles/battenberg_beagle"
@@ -69,7 +71,7 @@ if (GENOMEBUILD=="hg19") {
 
 } else if (GENOMEBUILD=="hg38") {
 	
-	BEAGLE_BASEDIR = "/hps/research/gerstung/sdentro/reference/human/battenberg_hg38"
+	BEAGLE_BASEDIR = opt$refdir
 	GENOMEBUILD = "hg38"
 	IMPUTEINFOFILE = file.path(BEAGLE_BASEDIR, "imputation/impute_info.txt")
 	G1000ALLELESPREFIX = file.path(BEAGLE_BASEDIR, "1000G_loci_hg38/1kg.phase3.v5a_GRCh38nounref_allele_index_chr")
@@ -82,7 +84,7 @@ if (GENOMEBUILD=="hg19") {
 	BEAGLEPLINK.template = file.path(BEAGLE_BASEDIR, "beagle5/plink.chrCHROMNAME.GRCh38.map")
 	BEAGLEJAR = file.path(BEAGLE_BASEDIR, "beagle.18May20.d20.jar")
 
-	CHROM_COORD_FILE = "/homes/sdentro/repo/battenberg/chromosome_coordinates_hg38.txt"
+	CHROM_COORD_FILE = file.path(BEAGLE_BASEDIR, "chromosome_coordinates_hg38.txt")
 } 
 
 PLATFORM_GAMMA = 1
