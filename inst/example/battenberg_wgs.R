@@ -14,7 +14,8 @@ option_list = list(
   make_option(c("--cpu"), type="numeric", default=8, help="The number of CPU cores to be used by the pipeline (Default: 8)", metavar="character"),
   make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character"),
   make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references ", metavar="character"),
-  make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character")
+  make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character"),
+  make_option(c("--beagle_usage"), type="character", default=F, help="Directory where your battenberg references are located", metavar="character")
 )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -45,7 +46,7 @@ ALLELECOUNTER = "alleleCounter"
 IMPUTE_EXE = "impute2"
 
 GENOMEBUILD = opt$refbuild
-USEBEAGLE = T
+USEBEAGLE = opt$beagle_usage
 
 # General static
 if (GENOMEBUILD=="hg19") {
