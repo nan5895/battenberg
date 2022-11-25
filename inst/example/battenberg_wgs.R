@@ -68,7 +68,7 @@ if (GENOMEBUILD=="hg19") {
 	BEAGLEREF.template = file.path(BEAGLE_BASEDIR, GENOME_VERSION, "chrCHROMNAME.1kg.phase3.v5a.b37.bref3")
 	BEAGLEPLINK.template = file.path(BEAGLE_BASEDIR, GENOME_VERSION, "plink.chrCHROMNAME.GRCh37.map")
 
-	CHROM_COORD_FILE = "/homes/sdentro/repo/battenberg/gcCorrect_chromosome_coordinates_hg19.txt"
+	CHROM_COORD_FILE = file.path(impute_basedir, "gcCorrect_chromosome_coordinates_hg19.txt")
 
 } else if (GENOMEBUILD=="hg38") {
 	
