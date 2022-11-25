@@ -12,8 +12,8 @@ option_list = list(
   make_option(c("--skip_preprocessing"), type="logical", default=FALSE, action="store_true", help="Provide when pre-processing has previously completed. This expects the files on disk", metavar="character"),
   make_option(c("--skip_phasing"), type="logical", default=FALSE, action="store_true", help="Provide when phasing has previously completed. This expects the files on disk", metavar="character"),
   make_option(c("--cpu"), type="numeric", default=8, help="The number of CPU cores to be used by the pipeline (Default: 8)", metavar="character"),
-  make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character")
-  make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references ", metavar="character")
+  make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character"),
+  make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references ", metavar="character"),
   make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character")
 )
 
