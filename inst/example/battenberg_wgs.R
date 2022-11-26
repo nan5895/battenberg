@@ -13,10 +13,10 @@ option_list = list(
   make_option(c("--skip_phasing"), type="logical", default=FALSE, action="store_true", help="Provide when phasing has previously completed. This expects the files on disk", metavar="character"),
   make_option(c("--cpu"), type="numeric", default=8, help="The number of CPU cores to be used by the pipeline (Default: 8)", metavar="character"),
   make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character"),
-  make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references ", metavar="character"),
+  make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references hg19 or hg38", metavar="character"),
   make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character"),
-  make_option(c("--beagle_usage"), type="character", default=F, help="Directory where your battenberg references are located", metavar="character"),
-  make_option(c("--analysis_type"), type="character", default="paired", help="Directory where your battenberg references are located", metavar="character")
+  make_option(c("--beagle_usage"), type="character", default=F, help="if you r using beagle T if you r using impute F", metavar="character"),
+  make_option(c("--analysis_type"), type="character", default="paired", help="paired or cell_line", metavar="character")
 )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -48,6 +48,9 @@ IMPUTE_EXE = "impute2"
 
 GENOMEBUILD = opt$refbuild
 USEBEAGLE = opt$beagle_usage
+
+print("your genomebuild" opt$refbuild)
+print("you are" opt$beagle_usage "to beagle usage")
 
 # General static
 if (GENOMEBUILD=="hg19") {
