@@ -15,7 +15,7 @@ option_list = list(
   make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character"),
   make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references hg19 or hg38", metavar="character"),
   make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character"),
-  make_option(c("--beagle_usage"), type="character", default=F, help="if you r using beagle T if you r using impute F", metavar="character"),
+  make_option(c("--beagle_usage"), type="character", default=FALSE, help="if you r using beagle T if you r using impute F", metavar="character"),
   make_option(c("--analysis_type"), type="character", default="paired", help="paired or cell_line", metavar="character")
 )
 
@@ -53,6 +53,17 @@ print(opt$beagle_usage)
 print(opt$refdir)
 print(opt$refbuild)
 print(opt$analysis_type)
+
+supported_analysis = c("paired", "cell_line", "germline")
+if (!analysis %in% supported_analysis) {
+	stop(paste0("Requested analysis type ", analysis, " is not available. Please provide either of ", paste(supported_analysis, collapse=" ")))
+}
+
+supported_genome_builds = c("hg19", "hg38")
+if (!GENOMEBUILD %in% supported_genome_builds) {
+	stop(paste0("Provided genome build ", GENOMEBUILD, " is not supported. Please provide either of ", paste(supported_genome_builds, collapse=" ")))
+}
+
 
 # General static
 if (GENOMEBUILD=="hg19") {
