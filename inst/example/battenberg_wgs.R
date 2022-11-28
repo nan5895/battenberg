@@ -49,8 +49,10 @@ IMPUTE_EXE = "impute2"
 GENOMEBUILD = opt$refbuild
 USEBEAGLE = opt$beagle_usage
 
-print("your genomebuild" opt$refbuild)
-print("you are" opt$beagle_usage "to beagle usage")
+print(opt$beagle_usage)
+print(opt$refdir)
+print(opt$refbuild)
+print(opt$analysis_type)
 
 # General static
 if (GENOMEBUILD=="hg19") {
