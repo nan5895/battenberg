@@ -7,7 +7,7 @@
 split_genome = function(SNPpos) {
   # look for gaps of more than 1Mb and chromosome borders
   holesOver1Mb = which(diff(SNPpos[,2])>=1000000)+1
-  chrBorders = which(diff(as.numeric(SNPpos[,1]))!=0)+1
+  chrBorders = which(diff(as.numeric(factor(SNPpos[,1],levels=unique(SNPpos[,1]))))!=0)+1
   holes = unique(sort(c(holesOver1Mb,chrBorders)))
 
   # find which segments are too small
@@ -160,6 +160,7 @@ calc_ln_likelihood_ratio <-function( LogR, BAFreq, BAF.length, BAF.size, BAF.mea
       nMajor = 1000
     }else{
       nMajor = nMajor + BAFreq * (0.01 - nMinor) / (1-BAFreq)
+      if (nMajor<0) nMajor=1000
     }
     nMinor = 0.01		
   }
@@ -398,6 +399,7 @@ is.segment.clonal <-function( LogR, BAFreq, BAF.length, BAF.size, BAF.mean, BAF.
 			nMajor = 1000
 		}else{
 			nMajor = nMajor + BAFreq * (0.01 - nMinor) / (1-BAFreq)
+			if (nMajor<0) nMajor=1000
 		}
 		nMinor = 0.01		
 	}
