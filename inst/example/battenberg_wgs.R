@@ -15,7 +15,8 @@ option_list = list(
   make_option(c("--bp"), type="character", default=NULL, help="Optional two column file (chromosome and position) specifying prior breakpoints to be used during segmentation", metavar="character"),
   make_option(c("--refbuild"), type="character", default="hg19", help="type your builded references hg19 or hg38", metavar="character"),
   make_option(c("--refdir"), type="character", default=NULL, help="Directory where your battenberg references are located", metavar="character"),
-  make_option(c("--beagle_usage"), type="character", default=FALSE, help="if you r using beagle T if you r using impute F", metavar="character"),
+  make_option(c("--beagle_usage"), type="logical", default=FALSE, help="if you r using beagle T if you r using impute F", metavar="character"),
+  make_option(c("--wbp"), type="logical", default=FALSE, help="write_battenberg_phasing T or F", metavar="character"),	
   make_option(c("--analysis_type"), type="character", default="paired", help="paired or cell_line", metavar="character")
 )
 
@@ -33,7 +34,7 @@ SKIP_PREPROCESSING = opt$skip_preprocessing
 SKIP_PHASING = opt$skip_phasing
 NTHREADS = opt$cpu
 PRIOR_BREAKPOINTS_FILE = opt$bp
-
+WRITE_BATTENBERG_PHASING = opt$wbp
 analysis = opt$analysis_type
 
 ###############################################################################
@@ -170,6 +171,7 @@ battenberg(analysis=analysis,
            skip_allele_counting=SKIP_ALLELECOUNTING,
            skip_preprocessing=SKIP_PREPROCESSING,
            skip_phasing=SKIP_PHASING,
+	   write_battenberg_phasing = WRITE_BATTENBERG_PHASING,
            prior_breakpoints_file=PRIOR_BREAKPOINTS_FILE,
 	   GENOMEBUILD=GENOMEBUILD,
 	   chrom_coord_file=CHROM_COORD_FILE)
